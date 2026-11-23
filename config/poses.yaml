@@ -1,0 +1,8 @@
+hold:
+  shoulder_joint: 0.0
+  elbow_joint: 0.3
+  gripper_joint: 0.01
+receive:
+  shoulder_joint: 0.5
+  elbow_joint: -0.2
+  gripper_joint: 0.025

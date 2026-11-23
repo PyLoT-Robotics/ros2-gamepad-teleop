@@ -1,0 +1,39 @@
+# Example robot only. Outputs are isolated until explicitly connected.
+teleop:
+  hard_max_linear: 0.4
+  max_linear: 0.25
+  turbo_max_linear: 0.4
+  max_angular: 0.6
+  turbo_max_angular: 0.8
+  joy_timeout_sec: 0.5
+  deadman_button: 4
+  turbo_button: 5
+  emergency_stop_button: 1
+  start_button: 7
+  head_pan_min: -1500
+  head_pan_max: 1500
+  head_tilt_min: -600
+  head_tilt_max: 600
+  head_pan_home: 0
+  head_tilt_home: 0
+  head_speed_ticks_per_sec: 600.0
+  arm_poses_file: poses.yaml
+robot:
+  arm_joints: [shoulder_joint, elbow_joint]
+  gripper_joint: gripper_joint
+  head_joints: [pan_joint, tilt_joint]
+  head_scale: [0.001, 0.001]
+  head_offset: [0.0, 0.0]
+  joint_limits:
+    shoulder_joint: [-1.5, 1.5]
+    elbow_joint: [-1.5, 1.5]
+    gripper_joint: [0.0, 0.025]
+    pan_joint: [-1.5, 1.5]
+    tilt_joint: [-0.6, 0.6]
+topics:
+  joy: /joy
+  cmd_vel: /gamepad/cmd_vel
+  head: /gamepad/head_trajectory
+  arm: /gamepad/arm_trajectory
+  gripper: /gamepad/gripper_trajectory
+  speech: /gamepad/speech

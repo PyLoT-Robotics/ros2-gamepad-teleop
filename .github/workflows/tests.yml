@@ -1,0 +1,27 @@
+name: Tests
+on: [push, pull_request]
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.10', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install '.[test]'
+      - run: python -m pytest -q
+  ros-jazzy:
+    runs-on: ubuntu-24.04
+    container: ros:jazzy-ros-base
+    steps:
+      - uses: actions/checkout@v4
+      - run: apt-get update && apt-get install -y python3-venv
+      - shell: bash
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          /usr/bin/python3 -m venv --system-site-packages /tmp/test-venv
+          /tmp/test-venv/bin/python -m pip install '.[test]'
+          PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 /tmp/test-venv/bin/python -m pytest -q
